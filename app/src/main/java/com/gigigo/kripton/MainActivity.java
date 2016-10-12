@@ -1,26 +1,43 @@
 package com.gigigo.kripton;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.gigigo.kripton.api.IView;
+import com.kripton.mvp.presenter.KPresenter;
+import com.kripton.mvp.view.IView;
+import com.kripton.mvp.view.ui.KActivity;
 
-public class MainActivity<T> extends AppCompatActivity implements IView<T>{
 
+public class MainActivity extends KActivity  implements IView {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        createPresenter();
+        mPresenter.loadData(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void createPresenter() {
+        MyInteractor interactor = new MyInteractor();
 
+        mPresenter = new KPresenter(interactor);
+        mPresenter.attachView(this);
+        mPresenter.setParams(new Object[] { "TEST" });
     }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
 
     @Override
     public void setProgressIndicator(boolean active) {
@@ -28,7 +45,7 @@ public class MainActivity<T> extends AppCompatActivity implements IView<T>{
     }
 
     @Override
-    public void showData(T data) {
+    public <T> void showData(T data) {
 
     }
 
@@ -36,4 +53,10 @@ public class MainActivity<T> extends AppCompatActivity implements IView<T>{
     public void showError(Throwable exception) {
 
     }
+
+    @Override
+    public void showFriendlyMessage(String response) {
+
+    }
+
 }
