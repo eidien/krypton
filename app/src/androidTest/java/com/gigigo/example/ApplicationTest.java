@@ -1,4 +1,4 @@
-package com.gigigo.kripton;
+package com.gigigo.example;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

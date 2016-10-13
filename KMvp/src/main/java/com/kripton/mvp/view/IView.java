@@ -11,7 +11,7 @@ public interface IView {
     void setProgressIndicator(boolean active);
 
     @UiThread
-    <T> void showData(T data);
+    <T> void  showData (T data);
 
     @UiThread
     void showError(Throwable exception);
