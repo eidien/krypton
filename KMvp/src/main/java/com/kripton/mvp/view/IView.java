@@ -5,13 +5,13 @@ import android.support.annotation.UiThread;
 /**
  * Created by jgodinez on 6/20/2016.
  */
-public interface IView {
+public interface IView<T> {
 
     @UiThread
     void setProgressIndicator(boolean active);
 
     @UiThread
-    <T> void  showData (T data);
+    void  showData (T data);
 
     @UiThread
     void showError(Throwable exception);

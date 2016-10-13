@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by Daniel on 12/10/2016.
  */
-public class PlayListFragment  extends KFragment implements IView{
+public class PlayListFragment  extends KFragment implements IView<PlayListItem>{
 
 
     @Override
@@ -68,9 +68,9 @@ public class PlayListFragment  extends KFragment implements IView{
     }
 
     @Override
-    public <PlayListItem> void showData(PlayListItem data) {
+    public void showData(PlayListItem data) {
 
-        
+
         Toast.makeText(getContext(),data.toString(),Toast.LENGTH_LONG).show();
 
     }
