@@ -13,6 +13,8 @@ public abstract class KFragment extends Fragment{
 
    public abstract void createPresenter();
 
+   public abstract int getLayoutId();
+
    @Override
    public void onDestroy() {
         super.onDestroy();
