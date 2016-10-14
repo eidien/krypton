@@ -1,6 +1,5 @@
 package com.gigigo.example.view.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,13 +10,10 @@ import android.widget.Toast;
 import com.gigigo.example.BuildConfig;
 import com.gigigo.example.R;
 import com.gigigo.example.interactor.PlayListInteractor;
-import com.gigigo.example.model.Item;
 import com.gigigo.example.model.PlayListItem;
 import com.kripton.mvp.presenter.KPresenter;
 import com.kripton.mvp.view.IView;
 import com.kripton.mvp.view.ui.KFragment;
-
-import java.util.ArrayList;
 
 /**
  * Created by Daniel on 12/10/2016.
@@ -34,7 +30,7 @@ public class PlayListFragment  extends KFragment implements IView<PlayListItem>{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_list,container,false);
+        View view=inflater.inflate(getLayoutId(), container, false);
         mPresenter.attachView(this);
         return view;
     }
@@ -53,6 +49,11 @@ public class PlayListFragment  extends KFragment implements IView<PlayListItem>{
         PlayListInteractor  mInteractor= new PlayListInteractor();
         mPresenter = new KPresenter(mInteractor);
         mPresenter.setParams(new Object[]{BuildConfig.ID_USER,BuildConfig.KEY_GOOGLE});
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_list;
     }
 
     @Override
