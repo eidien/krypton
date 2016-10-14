@@ -4,15 +4,13 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
 import com.kripton.mvp.presenter.KPresenter;
-import com.kripton.mvp.view.IView;
 
 
 /**
  * Created by Daniel on 30/06/2016.
  */
-public abstract class KActivityRestApi extends AppCompatActivity implements IView {
+public abstract class KBaseActivity extends AppCompatActivity {
 
     protected   KPresenter mPresenter;
 
@@ -27,6 +25,7 @@ public abstract class KActivityRestApi extends AppCompatActivity implements IVie
         super.onCreate(savedInstanceState, persistentState);
         setContentView(getLayoutId());
     }
+
 
     public abstract void createPresenter();
 
