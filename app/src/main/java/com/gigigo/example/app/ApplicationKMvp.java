@@ -1,6 +1,6 @@
 package com.gigigo.example.app;
 
-import android.os.Build;
+import android.app.Application;
 
 import com.gigigo.example.BuildConfig;
 
@@ -9,7 +9,7 @@ import kripton.extensions.retrofit.RetrofitFactoryService;
 /**
  * Created by Daniel on 12/10/2016.
  */
-public class Application extends android.app.Application {
+public class ApplicationKMvp extends Application {
 
     @Override
     public void onCreate() {

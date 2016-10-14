@@ -3,16 +3,10 @@ package com.gigigo.example.interactor;
 import android.support.annotation.NonNull;
 
 import com.gigigo.example.api.PlayListService;
-import com.gigigo.example.model.Item;
 import com.gigigo.example.model.PlayListItem;
 import com.kripton.mvp.interactor.ILoaderCallback;
 import com.kripton.mvp.interactor.KInteractor;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-import kripton.extensions.retrofit.Action;
 import kripton.extensions.retrofit.RetrofitFactoryService;
 
 /**

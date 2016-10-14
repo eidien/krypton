@@ -1,15 +1,9 @@
 package com.gigigo.example.api;
 
-import com.gigigo.example.model.Item;
 import com.gigigo.example.model.PlayListItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
