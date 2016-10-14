@@ -1,7 +1,11 @@
 package com.gigigo.example.view.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +13,22 @@ import android.widget.Toast;
 
 import com.gigigo.example.BuildConfig;
 import com.gigigo.example.R;
+import com.gigigo.example.adapter.PlayListRecyclerAdapter;
 import com.gigigo.example.interactor.PlayListInteractor;
+import com.gigigo.example.model.Item;
 import com.gigigo.example.model.PlayListItem;
 import com.kripton.mvp.presenter.KPresenter;
 import com.kripton.mvp.view.IView;
 import com.kripton.mvp.view.ui.KBaseFragment;
+import com.kripton.mvp.view.ui.adapter.ItemListener;
 
 /**
  * Created by Daniel on 12/10/2016.
  */
-public class PlayListFragment  extends KBaseFragment implements IView<PlayListItem>{
+public class PlayListFragment  extends KBaseFragment implements IView<PlayListItem>, ItemListener<Item> {
 
+    private ProgressDialog mProgresDialog;
+    private RecyclerView mRecyclerPlayList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +41,15 @@ public class PlayListFragment  extends KBaseFragment implements IView<PlayListIt
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(getLayoutId(), container, false);
         mPresenter.attachView(this);
+
+        mProgresDialog = new ProgressDialog(getActivity());
+        mProgresDialog.setMessage(getString(R.string.title_dialog_load));
+
+        mRecyclerPlayList = (RecyclerView) view.findViewById(R.id.recycler_playlist);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerPlayList.setLayoutManager(mLinearLayoutManager);
+
         return view;
     }
 
@@ -39,7 +57,6 @@ public class PlayListFragment  extends KBaseFragment implements IView<PlayListIt
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPresenter.loadData(true);
-
     }
 
 
@@ -64,31 +81,27 @@ public class PlayListFragment  extends KBaseFragment implements IView<PlayListIt
 
     @Override
     public void setProgressIndicator(boolean active) {
-        PlayListItem item = new PlayListItem();
-        item.items= null;
+        if (active) mProgresDialog.show(); else mProgresDialog.dismiss();
     }
 
     @Override
     public void showData(PlayListItem data) {
-
-
-        Toast.makeText(getContext(),data.toString(),Toast.LENGTH_LONG).show();
-
+        PlayListRecyclerAdapter mPlayListRecyclerAdapter = new PlayListRecyclerAdapter(getActivity(), data.items, this);
+        mRecyclerPlayList.setAdapter(mPlayListRecyclerAdapter);
     }
 
     @Override
     public void showError(Throwable exception) {
         Toast.makeText(getContext(),exception.toString(),Toast.LENGTH_LONG).show();
-
     }
-
-    public  void getData(PlayListItem data){
-        data.items = null;
-    }
-
 
     @Override
     public void showFriendlyMessage(String response) {
 
+    }
+
+    @Override
+    public void onItemClick(@NonNull Item item) {
+        Toast.makeText(getActivity(), item.snippet.title, Toast.LENGTH_SHORT).show();
     }
 }
