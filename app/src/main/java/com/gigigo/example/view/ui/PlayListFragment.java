@@ -13,12 +13,12 @@ import com.gigigo.example.interactor.PlayListInteractor;
 import com.gigigo.example.model.PlayListItem;
 import com.kripton.mvp.presenter.KPresenter;
 import com.kripton.mvp.view.IView;
-import com.kripton.mvp.view.ui.KFragment;
+import com.kripton.mvp.view.ui.KBaseFragment;
 
 /**
  * Created by Daniel on 12/10/2016.
  */
-public class PlayListFragment  extends KFragment implements IView<PlayListItem>{
+public class PlayListFragment  extends KBaseFragment implements IView<PlayListItem>{
 
 
     @Override
